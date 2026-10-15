@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "AtomicXCore",
-    platforms: [.iOS(.v13)],
+    platforms: [.iOS(.v14)],
     products: [
         .library(name: "AtomicXCore",
                  targets: ["AtomicXCoreBinary", "AtomicXCoreDeps"])
@@ -15,8 +15,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "AtomicXCoreBinary",
-            url: "https://sdk-liteav-1252463788.cos.ap-hongkong.myqcloud.com/app/tuikit/download/release/5.2/AtomicXCore_5.2.1.zip",
-            checksum: "def42d0b450dbb9cdf3a05c18b5685d152d095a4aac18b5b9221c347df345280"
+            url: "https://liteav.sdk.qcloud.com/app/tuikit/download/release/5.2/AtomicXCore_5.2.2.zip",
+            checksum: "982f77ffe8ae9c5a559b4d199d2df1eb9be6c6703672d7320b6ab93193a67eab"
         ),
         .target(
             name: "AtomicXCoreDeps",
@@ -24,7 +24,15 @@ let package = Package(
                 .product(name: "Chat_SDK_SwiftPM", package: "Chat_SDK_SwiftPM"),
                 .product(name: "Professional_SwiftPM", package: "Professional_SwiftPM")
             ],
-            path: "Sources/Deps"
+            path: "Sources/Deps",
+            linkerSettings: [
+                .linkedFramework("CoreTelephony"),
+                .linkedFramework("Foundation"),
+                .linkedFramework("SystemConfiguration"),
+                .linkedFramework("UIKit"),
+                .linkedLibrary("c++"),
+                .linkedLibrary("sqlite3")
+            ]
         )
     ]
 )
